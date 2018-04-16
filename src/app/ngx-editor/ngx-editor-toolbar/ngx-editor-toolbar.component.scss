@@ -107,6 +107,20 @@
                 }
             }
         }
+
+        select.form-control-sm {
+          background: inherit;
+
+          option {
+            background: inherit;
+          }
+        }
+
+        #hexInput, #hexInput:active {
+          border-bottom: none;
+          height: 50px;
+          cursor: pointer;
+        }
     }
 
     .form-check {

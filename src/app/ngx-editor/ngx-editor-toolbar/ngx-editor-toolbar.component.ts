@@ -5,6 +5,7 @@ import { PopoverConfig } from 'ngx-bootstrap';
 import { CommandExecutorService } from '../common/services/command-executor.service';
 import { MessageService } from '../common/services/message.service';
 import * as Utils from '../common/utils/ngx-editor.utils';
+import { fonts } from './fonts.const';
 
 @Component({
   selector: 'app-ngx-editor-toolbar',
@@ -37,6 +38,8 @@ export class NgxEditorToolbarComponent implements OnInit {
   hexColor = '';
   /** show/hide image uploader */
   isImageUploader = false;
+  /** list of possible fonts for dropdown list */
+  possibleFonts = [];
 
   /**
    * Editor configuration
@@ -213,7 +216,7 @@ export class NgxEditorToolbarComponent implements OnInit {
 
   /** inser text/background color */
   insertColor(color: string, where: string): void {
-
+  console.log(color, where);
     try {
       this._commandExecutorService.insertColor(color, where);
     } catch (error) {
@@ -239,7 +242,7 @@ export class NgxEditorToolbarComponent implements OnInit {
 
   /** set font Name/family */
   setFontName(fontName: string): void {
-
+    console.log(fontName);
     try {
       this._commandExecutorService.setFontName(fontName);
     } catch (error) {
@@ -263,6 +266,15 @@ export class NgxEditorToolbarComponent implements OnInit {
     this.buildUrlForm();
     this.buildImageForm();
     this.buildVideoForm();
+
+    this.possibleFonts = fonts.sort((font1, font2) => {
+      if(font1["label"] < font2["label"])
+        return -1;
+      if(font1["label"] == font2["label"])
+        return 0;
+      if(font1["label"] > font2["label"])
+        return 1
+    });
   }
 
 }

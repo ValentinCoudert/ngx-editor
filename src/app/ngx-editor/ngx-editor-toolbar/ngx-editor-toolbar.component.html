@@ -249,7 +249,7 @@
       <form autocomplete="off">
         <div class="form-group">
           <label for="hexInput" class="small">Hex Color</label>
-          <input type="text" class="form-control-sm" id="hexInput" name="hexInput" maxlength="7" placeholder="HEX Color" [(ngModel)]="hexColor"
+          <input type="color" class="form-control-sm" id="hexInput" name="hexInput" maxlength="7" placeholder="HEX Color" [(ngModel)]="hexColor"
             required>
         </div>
         <button type="button" class="btn-primary btn-sm btn" (click)="insertColor(hexColor, selectedColorTab)">Submit</button>
@@ -277,9 +277,16 @@
   <div class="ngxe-popover extra-gt1">
     <form autocomplete="off">
       <div class="form-group">
-        <label for="fontSize" class="small">Font Size</label>
-        <input type="text" class="form-control-sm" id="fontSize" name="fontName" placeholder="Ex: 'Times New Roman', Times, serif"
-          [(ngModel)]="fontName" required>
+        <label for="fontName" class="small">Font Name</label>
+        <select class="form-control-sm"
+                id="fontName"
+                name="fontName"
+                placeholder="Select a font"
+                [(ngModel)]="fontName" required>
+          <option *ngFor="let font of possibleFonts" [value]="font.value" [ngStyle]="{'font-family': font.value}">
+            {{ font.label }}
+          </option>
+        </select>
       </div>
       <button type="button" class="btn-primary btn-sm btn" (click)="setFontName(fontName)">Submit</button>
     </form>
